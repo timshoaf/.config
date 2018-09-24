@@ -32,7 +32,7 @@ Plug 'ncm2/ncm2-racer'
 call plug#end()
 
 
-let g:autofmt_autosave = 1
+let g:rustfmt_autosave = 1
 
 " a basic set up for LanguageClient-Neovim
 "
@@ -54,7 +54,13 @@ noremap <silent> R :call LanguageClient_textDocument_rename()<CR>
 noremap <silent> S :call LanugageClient_textDocument_documentSymbol()<CR>
 " }}}
 
-:set number
+:set number relativenumber
+
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
 
 set shell=zsh
 
