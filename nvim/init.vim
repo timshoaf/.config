@@ -28,7 +28,12 @@ Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-racer'
 
+Plug 'majutsushi/tagbar'
 
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
+Plug 'skywind3000/asyncrun.vim'
 call plug#end()
 
 
@@ -38,7 +43,7 @@ let g:rustfmt_autosave = 1
 "
 " " << LSP >> {{{
 
-let g:LanguageClient_autoStart = 1
+let g:LanguageClient_autoStart = 0
 nnoremap <leader>lcs :LanguageClientStart<CR>
 
 " if you want it to turn on automatically
@@ -68,3 +73,11 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+nmap <F8> :TagbarToggle<CR>
+
+autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --fix %
+
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
+let g:ale_lint_on_enter = 0 " Less distracting when opening a new file
